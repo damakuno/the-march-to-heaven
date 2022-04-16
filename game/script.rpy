@@ -26,15 +26,35 @@ label start:
     # directory.
 
     show MC_default
-
     # These display lines of dialogue.
+    
+    MC "How you doing sis?  The doctor says you should be up and about in a few days. I know the \"results\" were pretty hard to take, but... I'm sure it'll be better once you wake up."
+menu:
 
-    MC "You've created a new Ren'Py game."
+    "Yes":                
+        jump option1_yes
+    "No":
+        jump option1_no
 
+    # show MC_talk
+
+    # MC "Once you add a story, pictures, and music, you can release it to the world!"
+
+
+label option1_yes:    
+    show MC_happy
+    MC "You chose option 1"
+    jump option1_done
+
+label option1_no:
     show MC_talk
+    MC "You chose option 2"
+    jump option1_done
 
-    MC "Once you add a story, pictures, and music, you can release it to the world!"
 
+label option1_done:
     # This ends the game.
-
+    show MC_talk
+    MC "Great!"
     return
+
