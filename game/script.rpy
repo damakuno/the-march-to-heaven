@@ -3,7 +3,12 @@
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
-define e = Character("Eileen")
+image MC_default = "char/mc_Default.png"
+image MC_sad = "char/mc_Sad.png"
+image MC_happy = "char/mc_Happy.png"
+image MC_talk = "char/mc_Talk.png"
+image MC_worried = "char/mc_Worried.png"
+define MC = Character("Sammy")
 
 
 # The game starts here.
@@ -20,13 +25,15 @@ label start:
     # replace it by adding a file named "eileen happy.png" to the images
     # directory.
 
-    show eileen happy
+    show MC_default
 
     # These display lines of dialogue.
 
-    e "You've created a new Ren'Py game."
+    MC "You've created a new Ren'Py game."
 
-    e "Once you add a story, pictures, and music, you can release it to the world!"
+    show MC_talk
+
+    MC "Once you add a story, pictures, and music, you can release it to the world!"
 
     # This ends the game.
 
