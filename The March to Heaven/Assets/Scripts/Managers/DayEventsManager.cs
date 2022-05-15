@@ -1,0 +1,73 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Enumerations;
+
+public class DayEventsManager : MonoBehaviour
+{
+    public delegate void OnTimeChange();
+    public OnTimeChange onTimeChangeEvents;
+    public List<DayEventController> daysList;
+    public TimeOfDay currTime { get; private set; }
+
+    GameManager gm;
+    VariableUIController varUICtrller;
+
+    void Awake()
+    {
+        gm = GameManager.Instance;
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+        // init references
+        varUICtrller = FindObjectOfType<VariableUIController>();
+
+        // initialise time of day at game start
+        currTime = TimeOfDay.MORNING;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    /// <summary>
+    /// Advances time of day by 1 unit
+    /// </summary>
+    public void AdvanceTime()
+    {
+        if (currTime == TimeOfDay.NIGHT)
+        {
+            GoToNextDay();
+        }
+        else
+        {
+            currTime++;
+        }
+        onTimeChangeEvents();
+    }
+
+    public void AdvanceTime(int units)
+    {
+        // check if action takes up more time than what's left in the day
+        if (units > 1 && (int)currTime + units > 3)
+        {
+            // invalid, should not have been able to do this. fire the ui dude.
+        }
+        else
+        {
+            currTime += units;
+        }
+        // TODO
+        onTimeChangeEvents();
+    }
+
+    public void GoToNextDay()
+    {
+        gm.currDay += 1;
+        currTime = 0;
+        daysList[gm.currDay].onDayStart.Invoke();
+    }
+}
