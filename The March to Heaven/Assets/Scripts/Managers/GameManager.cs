@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
         {
             onGameStartEvents();
         }
-        currDay = 1;
+        
         acceptance = 0;
         money = 0;
         stress = 0;

@@ -969,6 +969,77 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 543924394}
   m_CullTransparentMesh: 1
+--- !u!1 &593101572
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 593101573}
+  - component: {fileID: 593101575}
+  - component: {fileID: 593101574}
+  m_Layer: 5
+  m_Name: Notification Area
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &593101573
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593101572}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 885569502}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 3.2258, y: -66.48169}
+  m_SizeDelta: {x: -47.4644, y: -132.9634}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &593101574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593101572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 1
+  m_Spacing: 10
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
+--- !u!222 &593101575
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593101572}
+  m_CullTransparentMesh: 1
 --- !u!1 &661511363
 GameObject:
   m_ObjectHideFlags: 0
@@ -1515,6 +1586,7 @@ GameObject:
   - component: {fileID: 885569503}
   - component: {fileID: 885569506}
   - component: {fileID: 885569505}
+  - component: {fileID: 885569507}
   m_Layer: 5
   m_Name: Phone
   m_TagString: Untagged
@@ -1536,6 +1608,7 @@ RectTransform:
   - {fileID: 1411091676}
   - {fileID: 1059305594}
   - {fileID: 661511364}
+  - {fileID: 593101573}
   m_Father: {fileID: 1665443769}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1656,6 +1729,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   btn_hidePhone: {fileID: 1411091677}
+--- !u!114 &885569507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 885569501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e24a85c5816576847b13cf528a298d56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  notifArea: {fileID: 593101572}
+  p_mailNotif: {fileID: 8610536118861120591, guid: 7e2a5ae1f3f26134987cb8c253f5a961, type: 3}
+  dataJson: {fileID: 4900000, guid: 72466ddf7fd0d694d93722a0af43a2bd, type: 3}
+  isMailOpen: 0
 --- !u!1 &924099978
 GameObject:
   m_ObjectHideFlags: 0

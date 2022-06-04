@@ -14,9 +14,9 @@ public class DayEventController : MonoBehaviour
     public UnityEvent onDayEnd;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        onDayStart.AddListener(() => FindObjectOfType<MailController>().SendAllMailOnDay(dayNumber));
     }
 
     // Update is called once per frame

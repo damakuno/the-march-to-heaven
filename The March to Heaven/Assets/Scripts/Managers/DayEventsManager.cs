@@ -16,6 +16,7 @@ public class DayEventsManager : MonoBehaviour
     void Awake()
     {
         gm = GameManager.Instance;
+        gm.onGameStartEvents += StartFirstDay;
     }
     // Start is called before the first frame update
     void Start()
@@ -30,7 +31,7 @@ public class DayEventsManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     /// <summary>
@@ -38,7 +39,7 @@ public class DayEventsManager : MonoBehaviour
     /// </summary>
     public void AdvanceTime()
     {
-        if (currTime == TimeOfDay.NIGHT)
+        if (currTime == TimeOfDay.EVENING)
         {
             GoToNextDay();
         }
@@ -64,10 +65,34 @@ public class DayEventsManager : MonoBehaviour
         onTimeChangeEvents();
     }
 
-    public void GoToNextDay()
+    public void StartFirstDay()
     {
         gm.currDay += 1;
         currTime = 0;
-        daysList[gm.currDay].onDayStart.Invoke();
+        daysList[gm.currDay - 1].onDayStart.Invoke();
+    }
+
+    public void GoToNextDay()
+    {
+        // REMEMBER TO USE currDay - 1 because currDay is 1-based
+        daysList[gm.currDay - 1].onDayEnd.Invoke();
+        // TODO have wait and callback in case the onDayEnd events have a delay or take some visible real playtime to revolve
+        gm.currDay += 1;
+        currTime = 0;
+        daysList[gm.currDay - 1].onDayStart.Invoke();
+    }
+
+    public string GetFormattedDate()
+    {
+        // TODO abstract the starting date out
+        int tempd = 8 + gm.currDay - 1;
+        return tempd + " March";
+    }
+
+    public string GetFormattedDate(int dayNum)
+    {
+        // TODO abstract the starting date out
+        int tempd = 8 + dayNum - 1;
+        return tempd + " March";
     }
 }

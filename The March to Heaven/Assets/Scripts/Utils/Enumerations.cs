@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Enumerations
 {
-    public enum TimeOfDay { MORNING, AFTERNOON, EVENING, NIGHT }
+    public enum TimeOfDay { MORNING, AFTERNOON, EVENING }
     // TODO
     // not sure if we'll need Ending enums
     public enum Ending { None = 0, Bad = 1, Neutral = 2, Good = 3, True = 4 }
