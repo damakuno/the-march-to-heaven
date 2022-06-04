@@ -10,6 +10,11 @@ public class DayEventsManager : MonoBehaviour
     public List<DayEventController> daysList;
     public TimeOfDay currTime { get; private set; }
 
+    // STARTING GAME CONSTANTS
+    const string START_MONTH = "March";
+    const int START_DATE = 4;
+    int numDays;
+
     GameManager gm;
     VariableUIController varUICtrller;
 
@@ -26,6 +31,7 @@ public class DayEventsManager : MonoBehaviour
 
         // initialise time of day at game start
         currTime = TimeOfDay.MORNING;
+        numDays = daysList.Count;
     }
 
     // Update is called once per frame
@@ -85,14 +91,14 @@ public class DayEventsManager : MonoBehaviour
     public string GetFormattedDate()
     {
         // TODO abstract the starting date out
-        int tempd = 8 + gm.currDay - 1;
-        return tempd + " March";
+        int tempd = START_DATE + gm.currDay - 1;
+        return tempd + " " + START_MONTH;
     }
 
     public string GetFormattedDate(int dayNum)
     {
         // TODO abstract the starting date out
-        int tempd = 8 + dayNum - 1;
-        return tempd + " March";
+        int tempd = START_DATE + dayNum - 1;
+        return tempd + " " + START_MONTH;
     }
 }

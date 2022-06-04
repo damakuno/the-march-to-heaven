@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class MailController : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class MailController : MonoBehaviour
     [SerializeField]
     MailNotif p_mailNotif;
     [SerializeField]
+    TextMeshProUGUI openMailHeader, openMailContent;
+    [SerializeField]
     TextAsset dataJson;
     GameData gameData;
 
@@ -17,6 +20,7 @@ public class MailController : MonoBehaviour
     List<MailNotif> mailItemList;
     string currMailId = ""; //if isMailOpen == true, stores the mailId reference for mailItemList
     AudioManager am;
+    PhoneController phCtrller;
 
     // Start is called before the first frame update
     void Awake()
@@ -24,6 +28,7 @@ public class MailController : MonoBehaviour
         // import mail data
         gameData = JsonUtility.FromJson<GameData>(dataJson.text);
         am = FindObjectOfType<AudioManager>();
+        phCtrller = FindObjectOfType<PhoneController>();
     }
 
     public void SendMail(MailData md)
@@ -55,6 +60,18 @@ public class MailController : MonoBehaviour
         MailData md = Array.Find(gameData.mailDatas, m => m.name == "billwarningtemplate");
         MailNotif temp = Instantiate(p_mailNotif, notifArea.transform).GetComponent<MailNotif>();
         temp.InitMailNotif(md);
+    }
+
+    public void ShowMailItem(MailNotif mail)
+    {
+        openMailHeader.text = mail.title;
+        openMailContent.text = mail.content;
+        phCtrller.ShowPhoneView(Enumerations.PhoneView.MailOpen);
+    }
+
+    public void CloseMailItem()
+    {
+        phCtrller.ShowPhoneView(Enumerations.PhoneView.Notifs);
     }
 }
 

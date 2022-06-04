@@ -11,5 +11,7 @@ namespace Enumerations
 
     #region NON-GAMEPLAY RELATED ENUMS
     public enum PhoneState { Minimized = 0, Peeking = 1, Active = 2 }
+    public enum PhoneView { Notifs = 0, Home = 1, Mail = 2, MailOpen = 3, Calendar = 4 }
+
     #endregion
 }

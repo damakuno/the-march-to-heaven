@@ -8,8 +8,11 @@ using Enumerations;
 public class PhoneController : MonoBehaviour
 {
     PhoneState curPhoneState = PhoneState.Minimized;
+    PhoneView currPhoneView = PhoneView.Notifs;
     [SerializeField]
     Button btn_hidePhone;
+    [SerializeField]
+    GameObject[] viewsList;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +20,7 @@ public class PhoneController : MonoBehaviour
 
     }
 
+    #region PHONE HIDE/SHOW + ANIMATIONS
     public void OnPhoneHover()
     {
         if (curPhoneState != PhoneState.Active)
@@ -59,4 +63,30 @@ public class PhoneController : MonoBehaviour
                 });
         }
     }
+    #endregion
+
+    #region PHONE VIEWS
+    public void ShowPhoneView(PhoneView view)
+    {
+        if (view == currPhoneView) return;
+        foreach(GameObject v in viewsList)
+        {
+            v.SetActive(false);
+        }
+
+        switch (view)
+        {
+            case PhoneView.Notifs:
+                viewsList[0].SetActive(true);
+                break;
+            case PhoneView.MailOpen:
+                viewsList[1].SetActive(true);
+                break;
+            default:
+                break;
+        }
+        currPhoneView = view;
+    }
+
+    #endregion
 }

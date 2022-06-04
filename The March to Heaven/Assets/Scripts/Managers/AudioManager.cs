@@ -22,6 +22,12 @@ public class AudioManager : MonoBehaviour
 
     const int MIN_VOL = -60;
 
+    void Awake()
+    {
+        if (PlayerPrefs.HasKey("bgmVol")) mixer.SetFloat("bgmVol", MIN_VOL * (1 - PlayerPrefs.GetFloat("bgmVol")));
+        if (PlayerPrefs.HasKey("sfxVol")) mixer.SetFloat("sfxVol", MIN_VOL * (1 - PlayerPrefs.GetFloat("sfxVol")));
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,10 +44,12 @@ public class AudioManager : MonoBehaviour
     public void SetBGMVolume(float volume)
     {
         mixer.SetFloat("bgmVol", MIN_VOL * (1 - volume));
+        PlayerPrefs.SetFloat("bgmVol", volume);
     }
 
     public void SetSFXVolume(float volume)
     {
         mixer.SetFloat("sfxVol", MIN_VOL * (1 - volume));
+        PlayerPrefs.SetFloat("sfxVol", volume);
     }
 }

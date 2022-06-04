@@ -21,7 +21,8 @@ public class MailNotif : MonoBehaviour
     DayEventsManager dm;
 
     // port over from MailItem in love2D
-    string title, content;
+    public string title { get; private set; }
+    public string content { get; private set; }
     int daySent;
     bool isRead;
 
@@ -31,6 +32,7 @@ public class MailNotif : MonoBehaviour
         bgImage = GetComponent<Image>();
         mailCtrller = FindObjectOfType<MailController>();
         dm = FindObjectOfType<DayEventsManager>();
+        GetComponent<Button>().onClick.AddListener(OpenMail);
     }
 
     // Update is called once per frame
@@ -53,6 +55,7 @@ public class MailNotif : MonoBehaviour
             //
         }
         mailCtrller.isMailOpen = true;
+        mailCtrller.ShowMailItem(this);
     }
 
     public void CloseMail()
