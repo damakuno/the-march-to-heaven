@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Enumerations
 {
     public enum TimeOfDay { MORNING, AFTERNOON, EVENING }
+    public enum Location { HOSPITAL = 0, WORK = 1, PARK = 2 }
     // TODO
     // not sure if we'll need Ending enums
     public enum Ending { None = 0, Bad = 1, Neutral = 2, Good = 3, True = 4 }

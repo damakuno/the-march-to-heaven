@@ -49,7 +49,7 @@ public class VariableUIController : MonoBehaviour
     public void UpdateStatsUI()
     {
         stressText.text = gm.stress.ToString();
-        moneyText.text = "$ " + gm.money;
+        moneyText.text = "$ " + gm.cash;
     }
 
     public void UpdateTimeUI()

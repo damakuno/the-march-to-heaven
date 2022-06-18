@@ -14,12 +14,24 @@ public class GameManager : MonoBehaviour
     public delegate void OnStatsChange();
     public OnStatsChange onStatsChangeEvents;
 
+    #region GAME CONSTANTS
+    public const int MAX_ACTIONS = 2;
+    public const int MAX_CASH = 9999;
+    public const int MAX_STRESS = 100;
+    public const int MAX_ACCEPTANCE = 100;
+    #endregion
+
     // game variables
+    public int actions { get; private set; }
     public int acceptance { get; private set; }
-    public int money { get; private set; }
+    public int cash { get; private set; }
     public int stress { get; private set; }
     public Ending currentEnding;
     public int currDay = 0; // days start from 1 in-game. 0 means game not started.
+
+    // JUST PORTED, HAVE NOT ORGANISED, TO REFACTOR MAYBE
+    int[] locationActions = { 0, 0, 0 };
+    int latePaymentStrikes = 0;
 
     [SerializeField] TextAsset dataJsonFile;
 
@@ -68,9 +80,9 @@ public class GameManager : MonoBehaviour
         {
             onGameStartEvents();
         }
-        
+
         acceptance = 0;
-        money = 0;
+        cash = 0;
         stress = 0;
     }
 
@@ -84,64 +96,91 @@ public class GameManager : MonoBehaviour
     }
 
     #region MODIFYING STATS
-    public void IncreaseAcceptance(int amt)
+    public void AddAcceptance(int amt)
     {
-        acceptance += amt;
+        acceptance = Mathf.Min(acceptance + amt, MAX_ACCEPTANCE);
+
         if (onStatsChangeEvents != null)
         {
             onStatsChangeEvents();
         }
     }
-    public void DecreaseAcceptance(int amt)
+    public void ReduceAcceptance(int amt)
     {
-        acceptance -= amt;
+        acceptance = Mathf.Max(acceptance - amt, 0);
+
         if (onStatsChangeEvents != null)
         {
             onStatsChangeEvents();
         }
     }
 
-    public void EarnMoney(int amt)
+    public void AddCash(int amt)
     {
-        money += amt;
+        cash = Mathf.Min(cash + amt, MAX_CASH);
+
         if (onStatsChangeEvents != null)
         {
             onStatsChangeEvents();
         }
     }
-    public void DeductMoney(int amt)
+    public void ReduceCash(int amt)
     {
-        money -= amt;
+        cash = Mathf.Max(cash - amt, 0);
+
         if (onStatsChangeEvents != null)
         {
             onStatsChangeEvents();
         }
     }
 
-    public void IncreaseStress(int amt)
+    public void AddStress(int amt)
     {
-        stress += amt;
+        stress = Mathf.Min(stress + amt, MAX_STRESS);
+
+        // TODO REMINDER: onstatschangeevents should probably include a check for whether any of the stats trigger the end game condition
         if (onStatsChangeEvents != null)
         {
             onStatsChangeEvents();
         }
     }
-    public void DecreaseStress(int amt)
+    public void ReduceStress(int amt)
     {
-        stress -= amt;
+        stress = Mathf.Max(stress - amt, 0);
+
         if (onStatsChangeEvents != null)
         {
             onStatsChangeEvents();
         }
+    }
+
+    public void AddActions(Location loc, int val)
+    {
+        locationActions[(int)loc] = locationActions[(int)loc] + val;
+        actions += val;
+    }
+
+    public void ResetActions()
+    {
+        for (int i = 0; i < locationActions.Length; i++)
+        {
+            locationActions[i] = 0;
+        }
+        actions = 0;
+    }
+
+    public int GetActionCount(Location loc)
+    {
+        return locationActions[(int)loc];
     }
     #endregion
 
     #region DEBUG FUNCTIONS
     public void RandomlyChangeStats()
     {
-        IncreaseStress(Random.Range(0, 50));
-        DeductMoney(Random.Range(0, 50));
-        EarnMoney(Random.Range(100, 300));
+        AddStress(Random.Range(0, 50));
+        ReduceCash(Random.Range(0, 50));
+        AddCash(Random.Range(100, 300));
     }
     #endregion
 }
