@@ -88,6 +88,21 @@ public class DayEventsManager : MonoBehaviour
         daysList[gm.currDay - 1].onDayStart.Invoke();
     }
 
+    public void GoToHospital()
+    {
+        daysList[gm.currDay - 1].onGoToHospital.Invoke();
+    }
+
+    public void GoToWork()
+    {
+        daysList[gm.currDay - 1].onGoToWork.Invoke();
+    }
+
+    public void GoToPark()
+    {
+        daysList[gm.currDay - 1].onGoToPark.Invoke();
+    }
+
     public string GetFormattedDate()
     {
         // TODO abstract the starting date out

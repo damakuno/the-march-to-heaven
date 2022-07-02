@@ -18,6 +18,10 @@ public class VariableUIController : MonoBehaviour
     TextMeshProUGUI timeText;
     [SerializeField]
     TextMeshProUGUI dayText;
+    [SerializeField]
+    Image stressArrow, cashArrow;
+    [SerializeField]
+    Sprite[] arrowSprites;
 
     // Managers holding the variables concerning the UI
     GameManager gm;
@@ -56,5 +60,16 @@ public class VariableUIController : MonoBehaviour
     {
         timeText.text = dayEventsManager.currTime.ToString();
         dayText.text = "Day " + gm.currDay;
+    }
+
+    public void ShowStatsPreview()
+    {
+        // TODO get the stat changes for cash and stress, then show arrows accordingly
+    }
+
+    public void HideStatsPreview()
+    {
+        stressArrow.enabled = false;
+        cashArrow.enabled = false;
     }
 }
